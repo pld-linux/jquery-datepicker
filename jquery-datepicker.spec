@@ -1,5 +1,5 @@
 %define		svnrev	108
-%define		rel		1
+%define		rel		2
 %define		plugin	datepicker
 Summary:	A flexible unobtrusive calendar component for jQuery
 Name:		jquery-%{plugin}
@@ -68,7 +68,7 @@ cp -p $css $out
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_appdir},%{_examplesdir}/%{name}-%{version}}
-cp -p build/jquery.datePicker.js $RPM_BUILD_ROOT%{_appdir}
+cp -p build/jquery.datePicker.js $RPM_BUILD_ROOT%{_appdir}/datePicker.js
 cp -p build/datePicker.css $RPM_BUILD_ROOT%{_appdir}
 
 cp -a demo/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
