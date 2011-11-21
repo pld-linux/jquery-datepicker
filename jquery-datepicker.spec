@@ -11,8 +11,9 @@ Group:		Applications/WWW
 # svn export http://jquery-datepicker.googlecode.com/svn/tags/2.1.2 jquery-datepicker-2.1.2
 # tar cjf jquery-datepicker-2.1.2.tar.bz2 jquery-datepicker-2.1.2
 Source0:	%{name}-%{version}.tar.bz2
-Source1:	http://www.kelvinluck.com/assets/jquery/datePicker/v2/demo/scripts/jquery.datePicker.js
 # Source0-md5:	df393f932ff6d5a37d4a0856c1cbb216
+Source1:	http://www.kelvinluck.com/assets/jquery/datePicker/v2/demo/scripts/jquery.datePicker.js
+# Source1-md5:	43dbc8fe7ec22688e268068982477c9c
 URL:		http://www.kelvinluck.com/assets/jquery/datePicker/v2/demo/
 BuildRequires:	js
 BuildRequires:	rpmbuild(macros) >= 1.565
