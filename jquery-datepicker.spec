@@ -1,5 +1,5 @@
 %define		svnrev	108
-%define		rel		2
+%define		rel		3
 %define		plugin	datepicker
 Summary:	A flexible unobtrusive calendar component for jQuery
 Name:		jquery-%{plugin}
@@ -18,7 +18,8 @@ URL:		http://www.kelvinluck.com/assets/jquery/datePicker/v2/demo/
 BuildRequires:	js
 BuildRequires:	rpmbuild(macros) >= 1.565
 BuildRequires:	yuicompressor
-Requires:	jquery >= 1.3
+Requires:	jquery >= 1.2.1
+Requires:	jquery-methods
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
