@@ -1,13 +1,17 @@
+%define		svnrev	108
+%define		rel		1
 %define		plugin	datepicker
 Summary:	A flexible unobtrusive calendar component for jQuery
 Name:		jquery-%{plugin}
+# last tag is 2.1.2, so no actual version of package
 Version:	2.1.2
-Release:	0.2
+Release:	0.%{svnrev}.%{rel}
 License:	MIT
 Group:		Applications/WWW
 # svn export http://jquery-datepicker.googlecode.com/svn/tags/2.1.2 jquery-datepicker-2.1.2
 # tar cjf jquery-datepicker-2.1.2.tar.bz2 jquery-datepicker-2.1.2
 Source0:	%{name}-%{version}.tar.bz2
+Source1:	http://www.kelvinluck.com/assets/jquery/datePicker/v2/demo/scripts/jquery.datePicker.js
 # Source0-md5:	df393f932ff6d5a37d4a0856c1cbb216
 URL:		http://www.kelvinluck.com/assets/jquery/datePicker/v2/demo/
 BuildRequires:	js
@@ -36,9 +40,20 @@ Demonstrations and samples for jQuery.datePicker.
 
 %prep
 %setup -q
+cp -p %{SOURCE1} dist
 
 %build
 install -d build
+
+# compress .js
+js=dist/jquery.datePicker.js
+out=build/jquery.datePicker.js
+%if 0%{!?debug:1}
+yuicompressor --charset UTF-8 $js -o $out
+js -C -f $out
+%else
+cp -p $js $out
+%endif
 
 # pack .css
 css=demo/styles/datePicker.css
@@ -52,7 +67,7 @@ cp -p $css $out
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_appdir},%{_examplesdir}/%{name}-%{version}}
-cp -p dist/jquery.datePicker.min-%{version}.js $RPM_BUILD_ROOT%{_appdir}/jquery.datePicker.js
+cp -p build/jquery.datePicker.js $RPM_BUILD_ROOT%{_appdir}
 cp -p build/datePicker.css $RPM_BUILD_ROOT%{_appdir}
 
 cp -a demo/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
