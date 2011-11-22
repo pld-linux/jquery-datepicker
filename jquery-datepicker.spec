@@ -1,5 +1,5 @@
 %define		svnrev	108
-%define		rel		3
+%define		rel		4
 %define		plugin	datepicker
 Summary:	A flexible unobtrusive calendar component for jQuery
 Name:		jquery-%{plugin}
@@ -14,9 +14,10 @@ Source0:	%{name}-%{version}.tar.bz2
 # Source0-md5:	df393f932ff6d5a37d4a0856c1cbb216
 Source1:	http://www.kelvinluck.com/assets/jquery/datePicker/v2/demo/scripts/jquery.datePicker.js
 # Source1-md5:	43dbc8fe7ec22688e268068982477c9c
+Patch0:		alt-view.patch
 URL:		http://www.kelvinluck.com/assets/jquery/datePicker/v2/demo/
 BuildRequires:	js
-BuildRequires:	rpmbuild(macros) >= 1.565
+BuildRequires:	rpmbuild(macros) >= 1.553
 BuildRequires:	yuicompressor
 Requires:	jquery >= 1.2.1
 Requires:	jquery-methods
@@ -42,13 +43,15 @@ Demonstrations and samples for jQuery.datePicker.
 
 %prep
 %setup -q
-cp -p %{SOURCE1} dist
+cp -p %{SOURCE1} demo/scripts/jquery.datePicker.js
+%undos -f js
+%patch0 -p1
 
 %build
 install -d build
 
 # compress .js
-js=dist/jquery.datePicker.js
+js=demo/scripts/jquery.datePicker.js
 out=build/jquery.datePicker.js
 %if 0%{!?debug:1}
 yuicompressor --charset UTF-8 $js -o $out

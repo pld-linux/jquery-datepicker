@@ -1,0 +1,75 @@
+--- trunk/demo/scripts/jquery.datePicker.js	2011-11-22 11:15:26.912614656 +0200
++++ trunk/demo/scripts/jquery.datePicker.js	2011-11-22 11:13:47.781893200 +0200
+@@ -852,15 +852,7 @@
+ 								$('<h2></h2>'),
+ 								$('<div class="dp-nav-prev"></div>')
+ 									.append(
+-										$('<a class="dp-nav-prev-year" href="#" title="' + $.dpText.TEXT_PREV_YEAR + '">&lt;&lt;</a>')
+-											.bind(
+-												'click',
+-												function()
+-												{
+-													return c._displayNewMonth.call(c, this, 0, -1);
+-												}
+-											),
+-										$('<a class="dp-nav-prev-month" href="#" title="' + $.dpText.TEXT_PREV_MONTH + '">&lt;</a>')
++										$('<a class="dp-nav-prev-month" href="#" title="' + $.dpText.TEXT_PREV_MONTH + '"></a>')
+ 											.bind(
+ 												'click',
+ 												function()
+@@ -871,24 +863,37 @@
+ 									),
+ 								$('<div class="dp-nav-next"></div>')
+ 									.append(
+-										$('<a class="dp-nav-next-year" href="#" title="' + $.dpText.TEXT_NEXT_YEAR + '">&gt;&gt;</a>')
++										$('<a class="dp-nav-next-month" href="#" title="' + $.dpText.TEXT_NEXT_MONTH + '"></a>')
+ 											.bind(
+ 												'click',
+ 												function()
+ 												{
+-													return c._displayNewMonth.call(c, this, 0, 1);
++													return c._displayNewMonth.call(c, this, 1, 0);
+ 												}
+-											),
+-										$('<a class="dp-nav-next-month" href="#" title="' + $.dpText.TEXT_NEXT_MONTH + '">&gt;</a>')
++											)
++									),
++								$('<div class="dp-calendar"></div>'),
++								$('<div class="dp-bottom"></div>').append(
++                                    $('<div class="dp-bottom-prev"><a class="dp-nav-prev-year" href="#" title="' + $.dpText.TEXT_PREV_YEAR + '">'+(c.displayedYear-1)+'</a></div>')
++                                        .bind(
++                                            'click',
++                                            function()
++                                            {
++                                                return c._displayNewMonth.call(c, this, 0, -1);
++                                            }
++                                        )
++                                ).append(
++										$('<div class="dp-bottom-next"><a class="dp-nav-next-year" href="#" title="' + $.dpText.TEXT_NEXT_YEAR + '">'+(c.displayedYear+1)+'</a></div>')
+ 											.bind(
+ 												'click',
+ 												function()
+ 												{
+-													return c._displayNewMonth.call(c, this, 1, 0);
++													return c._displayNewMonth.call(c, this, 0, 1);
+ 												}
+ 											)
+-									),
+-								$('<div class="dp-calendar"></div>')
++									)
++                                
++                                
+ 							)
+ 							.bgIframe()
+ 						);
+@@ -1122,6 +1127,10 @@
+ 						}
+ 					}
+ 				}
++                $('.dp-nav-next-year', this.context).text(this.displayedYear+1);
++                $('.dp-nav-prev-year', this.context).text(this.displayedYear-1);
++                
++                
+ 				this._applyRenderCallbacks();
+ 			},
+ 			_closeCalendar : function(programatic, ele)
