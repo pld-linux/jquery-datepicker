@@ -45,7 +45,7 @@ Demonstrations and samples for jQuery.datePicker.
 %setup -q
 cp -p %{SOURCE1} demo/scripts/jquery.datePicker.js
 %undos -f js
-%patch0 -p1
+%patch -P0 -p1
 
 %build
 install -d build
